@@ -13,12 +13,14 @@ Vì các nút của danh sách liên kết đôi đều có 2 con trỏ, giống
 Như vậy ta sẽ dùng nút có hai con trỏ : left ( trỏ tới phần tử trước nó ), right ( trỏ tới phần tử sau nó )
 */
 
+#include<iostream>
+
 //====================================================================================================
 template <class data>
 class Tnode{
   public:
     data info;
-    Tnode* left, * right;           //left : trỏ tới nút trước nó - right : trỏ tới nút sau nó
+    Tnode* left, * right;           //LEFT : TRỎ TỚI NÚT TRƯỚC NÓ - RIGHT : TRỎ TỚI NÚT SAU NÓ
     
   //HÀM KHỞI TẠO
   Tnode(data element = 0);
@@ -44,12 +46,12 @@ template <class data>
 class DList{
   public:
     Tnode<data>* head, * tail;
-    int len;
+    unsigned int len;
     
   //HÀM KHỞI TẠO
   DList();                            //Khởi tạo một danh sách rỗng
   //NÂNG CAO
-  DList(int length, ...);             //Khởi tạo một danh sách có số nút được chỉ định
+  DList(unsigned int length, ...);             //Khởi tạo một danh sách có số nút được chỉ định
   
   //HÀM BỔ TRỢ : sẽ được viết ở các bài sau
   bool isEmpty();                     //Trả về true nếu danh sách rỗng
@@ -81,18 +83,85 @@ class DList{
   void sort_quick(bool ascending = true);             //Sắp xếp danh sách : O(n^2) hoặc O(n logn)
 };
   
+//Khởi tạo DList rỗng
+template <class data>
+DList<data>::DList()
+{
+  head = tail = NULL;
+  len = 0;
+}
   
+//Khai báo thư viện stdarg.h
+#include<stdarg.h>
+
+//Khởi tạo DList có sẵn các nút
+template <class data>
+DList<data>::DList(unsigned int length, ...)
+{
+  if(length == 0)
+  {
+    head = tail = NULL;
+    len = 0;
+    return;
+  }
   
+  va_list list;
+  va_start(list, length);
   
+  head = tail = new Tnode<data>(va_arg(list, data));      //Tạo nút đầu tiên
+  len = length;
   
+  for(int i = 1; i < length; i++, tail = tail->right)
+  {
+    tail->right = new Tnode<data>(va_arg(list, data));    //Tạo các nút kế tiếp
+    tail->right->left = tail;
+  }
   
+  va_end(list);
+}
+
+/*Hoặc ta có thể sử dụng đệ quy để tạo n nút, sau đó mới gán giá trị vào
+Hàm sau đây không thuộc lớp DList*/
+
+/*//Tạo n nút được chỉ định
+template <class data>
+Tnode<data>* new_nTnode(int n)
+{
+  if(n <= 0)
+  return NULL;
   
+  Tnode<data>* p = new Tnode<data>();
+  p->right = new_nTnode<data>(n - 1);
   
+  if(p->right)
+    p->right->left = p;
   
+  return p;
+}
+
+//Khởi tạo DList có sẵn các nút
+template <class data>
+DList<data>::DList(unsigned int length, ...)
+{
+  if(length == 0)
+  {
+    head = tail = NULL;
+    len = 0;
+    return;
+  }
   
+  va_list list;
+  va_start(list, length);
+  head = tail = new_nTnode<data>(length);
+  len = length;
   
-  
-  
-  
-  
-  
+  for(;; tail = tail->right)
+  {
+    tail->info = va_arg(list, data);
+    if(tail->right == NULL)
+      break;
+  }
+    
+  va_end(list);
+}
+*/
