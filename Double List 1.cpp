@@ -58,7 +58,8 @@ class DList{
   void del();                         //Giải phóng toàn bộ danh sách
   void show();                        //In danh sách theo chiều xuôi
   void showrev();                     //In danh sách theo chiều ngược
-  void reverse();                     //Đảo danh sách
+  void reverse();                     //Đảo danh sách O(n)
+  bool isSymmetry();                  //Trả về true nếu danh sách đối xứng  O(n)
   
   void addhead(data element);         //Thêm một nút vào đầu danh sách
   void addhead(Tnode<data>* element); //Thêm một nút vào đầu danh sách
