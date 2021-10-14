@@ -18,3 +18,6 @@ Hiện tại đang có :
 
 - Double List bài 1 : tạo cấu trúc node, DList và các hàm khởi tạo
 - Double List bài 2 : kiểm tra danh sách rỗng, giải phóng toàn bộ danh sách, xuất danh sách, xuất ngược danh sách, đảo danh sách, kiểm tra danh sách đối xứng, tìm nút mang giá trị được chỉ định, giá trị lớn nhất, nhỏ nhất
+
+
+![](https://komarev.com/ghpvc/?username=Ca-Len-Men)
