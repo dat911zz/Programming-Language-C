@@ -5,7 +5,7 @@
 Tổng hợp các bài ( đã test code, có thể tải về sử dụng ) <3
 
 - DataStruct1.h : gồm 5 bài Single List
-
+- SQsupport.h   : gồm stack và queue
 
 Hiện tại đang có :
 
